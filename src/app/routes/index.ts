@@ -3,6 +3,7 @@ const router = express.Router();
 import { UserRoutes } from '../modules/user/user.route';
 import { PlatformRoutes } from '../modules/platform/platform.route';
 import { PostTypeRoutes } from '../modules/postType/postType.route';
+import { PostRoutes } from '../modules/post/post.route';
 const moduleRoutes = [
   {
     path: '/users',
@@ -15,6 +16,10 @@ const moduleRoutes = [
   {
     path: '/postTypes',
     route: PostTypeRoutes,
+  },
+  {
+    path: '/posts',
+    route: PostRoutes,
   },
 ];
 

@@ -1,6 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import httpStatus from 'http-status';
+import { ApplicationRoutes } from './app/routes';
 const app: Application = express();
 
 // middlewares
@@ -13,6 +14,9 @@ app.get('/', (req, res) => {
     message: 'Welcome to help-desk-by-developers-server',
   });
 });
+
+// application routes || apis
+app.use('/api/v1', ApplicationRoutes);
 // handl not found route
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.NOT_FOUND).json({

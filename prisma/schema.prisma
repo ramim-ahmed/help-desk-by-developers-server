@@ -6,3 +6,91 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String    @id @default(uuid())
+  role     Role      @default(USER)
+  name     String
+  email    String
+  avatar   String
+  password String
+  createAt DateTime  @default(now()) @map("create_at")
+  updateAt DateTime  @updatedAt @map("updated_at")
+  Post     Post[]
+  Comment  Comment[]
+  Like     Like[]
+
+  @@map("users")
+}
+
+model Platform {
+  id       String   @id @default(uuid())
+  title    String
+  icon     String
+  createAt DateTime @default(now()) @map("create_at")
+  updateAt DateTime @updatedAt @map("updated_at")
+  Post     Post[]
+
+  @@map("platforms")
+}
+
+model PostType {
+  id       String   @id @default(uuid())
+  title    String
+  icon     String
+  createAt DateTime @default(now()) @map("create_at")
+  updateAt DateTime @updatedAt @map("updated_at")
+  Post     Post[]
+
+  @@map("post_types")
+}
+
+model Post {
+  id         String    @id @default(uuid())
+  title      String
+  userId     String    @map("user_id")
+  user       User      @relation(fields: [userId], references: [id])
+  platformId String    @map("platform_id")
+  platform   Platform  @relation(fields: [platformId], references: [id])
+  postTypeId String    @map("post_type_id")
+  postType   PostType  @relation(fields: [postTypeId], references: [id])
+  content    String
+  uploadImg  String    @map("upload_img")
+  postedDate String
+  createAt   DateTime  @default(now()) @map("create_at")
+  updateAt   DateTime  @updatedAt @map("updated_at")
+  Comment    Comment[]
+  Like       Like[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id       String   @id @default(uuid())
+  title    String
+  userId   String   @map("user_id")
+  user     User     @relation(fields: [userId], references: [id])
+  postId   String   @map("post_id")
+  post     Post     @relation(fields: [postId], references: [id])
+  createAt DateTime @default(now()) @map("create_at")
+  updateAt DateTime @updatedAt @map("updated_at")
+
+  @@map("comments")
+}
+
+model Like {
+  id       String   @id @default(uuid())
+  userId   String   @map("user_id")
+  user     User     @relation(fields: [userId], references: [id])
+  postId   String   @map("post_id")
+  post     Post     @relation(fields: [postId], references: [id])
+  createAt DateTime @default(now()) @map("create_at")
+  updateAt DateTime @updatedAt @map("updated_at")
+
+  @@map("likes")
+}
+
+enum Role {
+  USER
+  ADMIN
+}

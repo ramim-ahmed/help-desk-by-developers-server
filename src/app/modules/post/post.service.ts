@@ -6,7 +6,12 @@ const createPost = async (data: Post): Promise<Post> => {
 };
 
 const getAllPosts = async (): Promise<Post[] | null> => {
-  const result = await prisma.post.findMany();
+  const result = await prisma.post.findMany({
+    include: {
+      Comment: true,
+      Like: true,
+    },
+  });
   return result;
 };
 

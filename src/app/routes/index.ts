@@ -5,6 +5,7 @@ import { PlatformRoutes } from '../modules/platform/platform.route';
 import { PostTypeRoutes } from '../modules/postType/postType.route';
 import { PostRoutes } from '../modules/post/post.route';
 import { CommentRoutes } from '../modules/comment/comment.route';
+import { LikeRoutes } from '../modules/like/like.route';
 const moduleRoutes = [
   {
     path: '/users',
@@ -25,6 +26,10 @@ const moduleRoutes = [
   {
     path: '/comments',
     route: CommentRoutes,
+  },
+  {
+    path: '/likes',
+    route: LikeRoutes,
   },
 ];
 

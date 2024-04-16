@@ -19,6 +19,24 @@ const createPostType = async (req: Request, res: Response) => {
   }
 };
 
+const getAllPostTypes = async (req: Request, res: Response) => {
+  try {
+    const result = await PostTypeService.getAllPostTypes();
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: 'PostTypes is fetch successfully!',
+      data: result,
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: 'PostTypes is fetch failed!',
+      error,
+    });
+  }
+};
+
 export const PostTypeController = {
   createPostType,
+  getAllPostTypes,
 };

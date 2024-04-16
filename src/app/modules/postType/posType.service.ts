@@ -6,6 +6,12 @@ const createPostType = async (data: PostType): Promise<PostType> => {
   return result;
 };
 
+const getAllPostTypes = async (): Promise<PostType[]> => {
+  const result = await prisma.postType.findMany();
+  return result;
+};
+
 export const PostTypeService = {
   createPostType,
+  getAllPostTypes,
 };

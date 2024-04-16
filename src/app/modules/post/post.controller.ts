@@ -19,7 +19,23 @@ const createPost = async (req: Request, res: Response) => {
     });
   }
 };
-
+const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const result = await PostService.getAllPosts();
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: 'Posts is fetch successfully!',
+      data: result,
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: 'Post is fetch failed!',
+      error,
+    });
+  }
+};
 export const PostController = {
   createPost,
+  getAllPosts,
 };

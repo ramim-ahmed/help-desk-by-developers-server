@@ -5,6 +5,12 @@ const createPlatform = async (data: Platform): Promise<Platform> => {
   return result;
 };
 
+const getAllPlatforms = async (): Promise<Platform[]> => {
+  const result = await prisma.platform.findMany();
+  return result;
+};
+
 export const PlatformService = {
   createPlatform,
+  getAllPlatforms,
 };

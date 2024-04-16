@@ -20,6 +20,24 @@ const createPlatform = async (req: Request, res: Response) => {
   }
 };
 
+const getAllPlatforms = async (req: Request, res: Response) => {
+  try {
+    const result = await PlatformService.getAllPlatforms();
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: 'Platform is fetch successfully!',
+      data: result,
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: 'Platform is fetch failed!',
+      error,
+    });
+  }
+};
+
 export const PlatformController = {
   createPlatform,
+  getAllPlatforms,
 };

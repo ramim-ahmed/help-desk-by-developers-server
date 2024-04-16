@@ -5,6 +5,12 @@ const createPost = async (data: Post): Promise<Post> => {
   return result;
 };
 
+const getAllPosts = async (): Promise<Post[] | null> => {
+  const result = await prisma.post.findMany();
+  return result;
+};
+
 export const PostService = {
   createPost,
+  getAllPosts,
 };

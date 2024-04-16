@@ -55,8 +55,8 @@ model Post {
   postTypeId String    @map("post_type_id")
   postType   PostType  @relation(fields: [postTypeId], references: [id])
   content    String
-  uploadImg  String    @map("upload_img")
-  postedDate String
+  uploadImg  String    @default("") @map("upload_img")
+  postedDate String    @map("posted_date")
   createAt   DateTime  @default(now()) @map("create_at")
   updateAt   DateTime  @updatedAt @map("updated_at")
   Comment    Comment[]
@@ -66,14 +66,15 @@ model Post {
 }
 
 model Comment {
-  id       String   @id @default(uuid())
-  title    String
-  userId   String   @map("user_id")
-  user     User     @relation(fields: [userId], references: [id])
-  postId   String   @map("post_id")
-  post     Post     @relation(fields: [postId], references: [id])
-  createAt DateTime @default(now()) @map("create_at")
-  updateAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  title       String
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+  postId      String   @map("post_id")
+  post        Post     @relation(fields: [postId], references: [id])
+  commentDate String   @map("comment_date")
+  createAt    DateTime @default(now()) @map("create_at")
+  updateAt    DateTime @updatedAt @map("updated_at")
 
   @@map("comments")
 }
@@ -93,4 +94,5 @@ model Like {
 enum Role {
   USER
   ADMIN
+  MODERATOR
 }

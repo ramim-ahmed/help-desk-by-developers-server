@@ -20,6 +20,23 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const result = await UserService.getAllUsers();
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: 'User is fetch successfully!',
+      data: result,
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: 'User is fetch failed!',
+      error,
+    });
+  }
+};
 export const UserController = {
   createUser,
+  getAllUsers,
 };

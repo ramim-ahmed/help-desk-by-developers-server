@@ -5,6 +5,19 @@ const createUser = async (data: User): Promise<User> => {
   return result;
 };
 
+const getAllUsers = async (): Promise<Partial<User>[]> => {
+  const result = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
+  return result;
+};
+
 export const UserService = {
   createUser,
+  getAllUsers,
 };

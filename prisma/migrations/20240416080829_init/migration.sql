@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
+CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN', 'MODERATOR');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -45,8 +45,8 @@ CREATE TABLE "posts" (
     "platform_id" TEXT NOT NULL,
     "post_type_id" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "upload_img" TEXT NOT NULL,
-    "postedDate" TEXT NOT NULL,
+    "upload_img" TEXT NOT NULL DEFAULT '',
+    "posted_date" TEXT NOT NULL,
     "create_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 

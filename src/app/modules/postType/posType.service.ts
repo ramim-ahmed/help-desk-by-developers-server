@@ -7,7 +7,11 @@ const createPostType = async (data: PostType): Promise<PostType> => {
 };
 
 const getAllPostTypes = async (): Promise<PostType[]> => {
-  const result = await prisma.postType.findMany();
+  const result = await prisma.postType.findMany({
+    orderBy: {
+      createAt: 'desc',
+    },
+  });
   return result;
 };
 
